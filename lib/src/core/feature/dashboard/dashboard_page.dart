@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/src/feature/remainder/remainder_view.dart';
+import 'package:weather/src/feature/weather/domain/weather_repo.dart';
+import 'package:weather/src/feature/weather/presentation/cubit/weather_cubit.dart';
 import 'package:weather/src/feature/weather/weather_view.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -29,17 +32,21 @@ class _DashboardPageState extends State<DashboardPage> {
           BottomNavigationBarItem(icon: Icon(Icons.alarm), label: 'Remainder'),
         ],
       ),
-      body: PageView(
-        controller: pageController,
-        onPageChanged: (value) {
-          setState(() {
-            viewIndex = value;
-          });
-        },
-        children: const [
-          WeatherView(),
-          RemainderView(),
-        ],
+      body: BlocProvider(
+        create: (context) =>
+            WeatherCubit(context.read<WeatherRepo>())..fetchWeather(),
+        child: PageView(
+          controller: pageController,
+          onPageChanged: (value) {
+            setState(() {
+              viewIndex = value;
+            });
+          },
+          children: const [
+            WeatherView(),
+            RemainderView(),
+          ],
+        ),
       ),
     );
   }
