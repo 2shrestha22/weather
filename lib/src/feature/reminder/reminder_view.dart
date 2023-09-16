@@ -5,8 +5,25 @@ class ReminderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Reminder'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Reminder'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.add_alarm),
+          ),
+        ],
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return const ListTile(
+            leading: Icon(Icons.alarm),
+            title: Text('Buy a car.'),
+            trailing: Icon(Icons.delete),
+          );
+        },
+      ),
     );
   }
 }

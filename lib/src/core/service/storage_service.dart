@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:weather/src/core/helper/storage_helper.dart';
 
-/// Always provides the same instance of CacheManager.
+/// Always provides the same instance of StorageService.
 class StorageService {
   factory StorageService() => _instance;
   StorageService._();
