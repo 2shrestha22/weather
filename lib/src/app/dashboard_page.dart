@@ -23,7 +23,7 @@ class _DashboardPageState extends State<DashboardPage> {
       create: (context) => WeatherRepoImpl(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Weather'),
+          title: const Text('Weather App'),
         ),
         bottomNavigationBar: BottomNavigationBar(
           onTap: pageController.jumpToPage,

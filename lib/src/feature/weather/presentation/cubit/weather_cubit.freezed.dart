@@ -16,49 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WeatherState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(ApiException exception) failure,
-    required TResult Function(Weather weather) data,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(ApiException exception)? failure,
-    TResult? Function(Weather weather)? data,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(ApiException exception)? failure,
-    TResult Function(Weather weather)? data,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_Data value) data,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failure value)? failure,
-    TResult? Function(_Data value)? data,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_Data value)? data,
-    required TResult orElse(),
-  }) =>
+  Weather? get weather => throw _privateConstructorUsedError;
+  ApiException? get exception => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $WeatherStateCopyWith<WeatherState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -67,6 +30,10 @@ abstract class $WeatherStateCopyWith<$Res> {
   factory $WeatherStateCopyWith(
           WeatherState value, $Res Function(WeatherState) then) =
       _$WeatherStateCopyWithImpl<$Res, WeatherState>;
+  @useResult
+  $Res call({Weather? weather, ApiException? exception, bool isLoading});
+
+  $WeatherCopyWith<$Res>? get weather;
 }
 
 /// @nodoc
@@ -78,396 +45,143 @@ class _$WeatherStateCopyWithImpl<$Res, $Val extends WeatherState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$WeatherStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_Loading implements _Loading {
-  const _$_Loading();
-
-  @override
-  String toString() {
-    return 'WeatherState.loading()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(ApiException exception) failure,
-    required TResult Function(Weather weather) data,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(ApiException exception)? failure,
-    TResult? Function(Weather weather)? data,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(ApiException exception)? failure,
-    TResult Function(Weather weather)? data,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_Data value) data,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failure value)? failure,
-    TResult? Function(_Data value)? data,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_Data value)? data,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Loading implements WeatherState {
-  const factory _Loading() = _$_Loading;
-}
-
-/// @nodoc
-abstract class _$$_FailureCopyWith<$Res> {
-  factory _$$_FailureCopyWith(
-          _$_Failure value, $Res Function(_$_Failure) then) =
-      __$$_FailureCopyWithImpl<$Res>;
-  @useResult
-  $Res call({ApiException exception});
-}
-
-/// @nodoc
-class __$$_FailureCopyWithImpl<$Res>
-    extends _$WeatherStateCopyWithImpl<$Res, _$_Failure>
-    implements _$$_FailureCopyWith<$Res> {
-  __$$_FailureCopyWithImpl(_$_Failure _value, $Res Function(_$_Failure) _then)
-      : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exception = null,
+    Object? weather = freezed,
+    Object? exception = freezed,
+    Object? isLoading = null,
   }) {
-    return _then(_$_Failure(
-      null == exception
-          ? _value.exception
-          : exception // ignore: cast_nullable_to_non_nullable
-              as ApiException,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Failure implements _Failure {
-  const _$_Failure(this.exception);
-
-  @override
-  final ApiException exception;
-
-  @override
-  String toString() {
-    return 'WeatherState.failure(exception: $exception)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Failure &&
-            (identical(other.exception, exception) ||
-                other.exception == exception));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, exception);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_FailureCopyWith<_$_Failure> get copyWith =>
-      __$$_FailureCopyWithImpl<_$_Failure>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(ApiException exception) failure,
-    required TResult Function(Weather weather) data,
-  }) {
-    return failure(exception);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(ApiException exception)? failure,
-    TResult? Function(Weather weather)? data,
-  }) {
-    return failure?.call(exception);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(ApiException exception)? failure,
-    TResult Function(Weather weather)? data,
-    required TResult orElse(),
-  }) {
-    if (failure != null) {
-      return failure(exception);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_Data value) data,
-  }) {
-    return failure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failure value)? failure,
-    TResult? Function(_Data value)? data,
-  }) {
-    return failure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_Data value)? data,
-    required TResult orElse(),
-  }) {
-    if (failure != null) {
-      return failure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Failure implements WeatherState {
-  const factory _Failure(final ApiException exception) = _$_Failure;
-
-  ApiException get exception;
-  @JsonKey(ignore: true)
-  _$$_FailureCopyWith<_$_Failure> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_DataCopyWith<$Res> {
-  factory _$$_DataCopyWith(_$_Data value, $Res Function(_$_Data) then) =
-      __$$_DataCopyWithImpl<$Res>;
-  @useResult
-  $Res call({Weather weather});
-
-  $WeatherCopyWith<$Res> get weather;
-}
-
-/// @nodoc
-class __$$_DataCopyWithImpl<$Res>
-    extends _$WeatherStateCopyWithImpl<$Res, _$_Data>
-    implements _$$_DataCopyWith<$Res> {
-  __$$_DataCopyWithImpl(_$_Data _value, $Res Function(_$_Data) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? weather = null,
-  }) {
-    return _then(_$_Data(
-      null == weather
+    return _then(_value.copyWith(
+      weather: freezed == weather
           ? _value.weather
           : weather // ignore: cast_nullable_to_non_nullable
-              as Weather,
-    ));
+              as Weather?,
+      exception: freezed == exception
+          ? _value.exception
+          : exception // ignore: cast_nullable_to_non_nullable
+              as ApiException?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $WeatherCopyWith<$Res> get weather {
-    return $WeatherCopyWith<$Res>(_value.weather, (value) {
-      return _then(_value.copyWith(weather: value));
+  $WeatherCopyWith<$Res>? get weather {
+    if (_value.weather == null) {
+      return null;
+    }
+
+    return $WeatherCopyWith<$Res>(_value.weather!, (value) {
+      return _then(_value.copyWith(weather: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-
-class _$_Data implements _Data {
-  const _$_Data(this.weather);
+abstract class _$$_WeatherStateCopyWith<$Res>
+    implements $WeatherStateCopyWith<$Res> {
+  factory _$$_WeatherStateCopyWith(
+          _$_WeatherState value, $Res Function(_$_WeatherState) then) =
+      __$$_WeatherStateCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({Weather? weather, ApiException? exception, bool isLoading});
 
   @override
-  final Weather weather;
+  $WeatherCopyWith<$Res>? get weather;
+}
+
+/// @nodoc
+class __$$_WeatherStateCopyWithImpl<$Res>
+    extends _$WeatherStateCopyWithImpl<$Res, _$_WeatherState>
+    implements _$$_WeatherStateCopyWith<$Res> {
+  __$$_WeatherStateCopyWithImpl(
+      _$_WeatherState _value, $Res Function(_$_WeatherState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? weather = freezed,
+    Object? exception = freezed,
+    Object? isLoading = null,
+  }) {
+    return _then(_$_WeatherState(
+      weather: freezed == weather
+          ? _value.weather
+          : weather // ignore: cast_nullable_to_non_nullable
+              as Weather?,
+      exception: freezed == exception
+          ? _value.exception
+          : exception // ignore: cast_nullable_to_non_nullable
+              as ApiException?,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_WeatherState implements _WeatherState {
+  const _$_WeatherState({this.weather, this.exception, this.isLoading = false});
+
+  @override
+  final Weather? weather;
+  @override
+  final ApiException? exception;
+  @override
+  @JsonKey()
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'WeatherState.data(weather: $weather)';
+    return 'WeatherState(weather: $weather, exception: $exception, isLoading: $isLoading)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Data &&
-            (identical(other.weather, weather) || other.weather == weather));
+            other is _$_WeatherState &&
+            (identical(other.weather, weather) || other.weather == weather) &&
+            (identical(other.exception, exception) ||
+                other.exception == exception) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, weather);
+  int get hashCode => Object.hash(runtimeType, weather, exception, isLoading);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DataCopyWith<_$_Data> get copyWith =>
-      __$$_DataCopyWithImpl<_$_Data>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(ApiException exception) failure,
-    required TResult Function(Weather weather) data,
-  }) {
-    return data(weather);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(ApiException exception)? failure,
-    TResult? Function(Weather weather)? data,
-  }) {
-    return data?.call(weather);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(ApiException exception)? failure,
-    TResult Function(Weather weather)? data,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(weather);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Failure value) failure,
-    required TResult Function(_Data value) data,
-  }) {
-    return data(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Failure value)? failure,
-    TResult? Function(_Data value)? data,
-  }) {
-    return data?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Failure value)? failure,
-    TResult Function(_Data value)? data,
-    required TResult orElse(),
-  }) {
-    if (data != null) {
-      return data(this);
-    }
-    return orElse();
-  }
+  _$$_WeatherStateCopyWith<_$_WeatherState> get copyWith =>
+      __$$_WeatherStateCopyWithImpl<_$_WeatherState>(this, _$identity);
 }
 
-abstract class _Data implements WeatherState {
-  const factory _Data(final Weather weather) = _$_Data;
+abstract class _WeatherState implements WeatherState {
+  const factory _WeatherState(
+      {final Weather? weather,
+      final ApiException? exception,
+      final bool isLoading}) = _$_WeatherState;
 
-  Weather get weather;
+  @override
+  Weather? get weather;
+  @override
+  ApiException? get exception;
+  @override
+  bool get isLoading;
+  @override
   @JsonKey(ignore: true)
-  _$$_DataCopyWith<_$_Data> get copyWith => throw _privateConstructorUsedError;
+  _$$_WeatherStateCopyWith<_$_WeatherState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

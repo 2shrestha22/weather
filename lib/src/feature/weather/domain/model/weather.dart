@@ -8,6 +8,8 @@ part 'weather.g.dart';
 class Weather with _$Weather {
   const factory Weather({
     @JsonKey(name: 'weather') required List<WeatherCondition> weatherConditions,
+    @JsonKey(name: 'main') required WeatherData weatherData,
+    @JsonKey(name: 'name') required String city,
   }) = _Weather;
 
   factory Weather.fromJson(Map<String, dynamic> json) =>
@@ -25,4 +27,19 @@ class WeatherCondition with _$WeatherCondition {
 
   factory WeatherCondition.fromJson(Map<String, dynamic> json) =>
       _$WeatherConditionFromJson(json);
+}
+
+@freezed
+class WeatherData with _$WeatherData {
+  const factory WeatherData({
+    required double temp,
+    @JsonKey(name: 'feels_like') required double feelsLike,
+    @JsonKey(name: 'temp_min') required double tempMin,
+    @JsonKey(name: 'temp_max') required double tempMax,
+    required double pressure,
+    required double humidity,
+  }) = _WeatherData;
+
+  factory WeatherData.fromJson(Map<String, dynamic> json) =>
+      _$WeatherDataFromJson(json);
 }

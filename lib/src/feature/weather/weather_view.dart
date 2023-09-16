@@ -1,6 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather/src/core/constant/app_colors.dart';
+import 'package:weather/src/core/constant/sizes.dart';
+import 'package:weather/src/core/extension/color_x.dart';
 import 'package:weather/src/core/helper/open_weather_helper.dart';
 import 'package:weather/src/core/widget/error_indicator.dart';
 import 'package:weather/src/core/widget/loading_indicator.dart';
@@ -11,32 +14,135 @@ class WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<WeatherCubit, WeatherState>(
-      builder: (context, state) {
-        return state.when(
-          loading: () => const LoadingIndicator(),
-          failure: (e) => ErrorIndicator(message: e.toString()),
-          data: (weather) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Text(
-                    'Today',
-                    style: Theme.of(context).textTheme.displaySmall,
+    return Stack(
+      children: [
+        _WeatherBackground(),
+        BlocBuilder<WeatherCubit, WeatherState>(
+          builder: (context, state) {
+            final weather = state.weather;
+
+            if (weather == null) {
+              // when weather is no yet availabe. Should show either loading
+              // or error.
+              if (state.exception != null) {
+                return ErrorIndicator(message: state.exception.toString());
+              }
+              return const LoadingIndicator();
+            } else {
+              // weather is availabe. user can refresh weather.
+              return RefreshIndicator(
+                onRefresh: () async {
+                  await context.read<WeatherCubit>().fetchWeather();
+                },
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(32),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          'Today',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ),
+                      sizedV,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.location_pin,
+                            size: 42,
+                          ),
+                          Text(
+                            weather.city,
+                            style: Theme.of(context).textTheme.displayMedium,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 200,
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: CachedNetworkImage(
+                                fit: BoxFit.scaleDown,
+                                imageUrl: OpenWeatherHelper.getIconUrl(
+                                  weather.weatherConditions.first.icon,
+                                  multiple: 4,
+                                ),
+                              ),
+                            ),
+                            Flexible(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    weather.weatherConditions.first.description
+                                        .toUpperCase(),
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
+                                  ),
+                                  Text(
+                                    '${weather.weatherData.temp} \u2103',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displayMedium,
+                                  ),
+                                  Text(
+                                    'Feels like ${weather.weatherData.temp} \u2103',
+                                    style:
+                                        Theme.of(context).textTheme.labelMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      sizedV,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Min: ${weather.weatherData.tempMin} \u2103'),
+                          sizedH,
+                          sizedH,
+                          Text('Max: ${weather.weatherData.tempMax} \u2103'),
+                        ],
+                      ),
+                      Text('Pressure: ${weather.weatherData.pressure} hPa'),
+                      Text('Humidity: ${weather.weatherData.humidity} %'),
+                    ],
                   ),
-                  Text(weather.weatherConditions.first.main),
-                  CachedNetworkImage(
-                    imageUrl: OpenWeatherHelper.getIconUrl(
-                      weather.weatherConditions.first.icon,
-                    ),
-                  ),
-                  Text(weather.weatherConditions.first.description),
-                ],
-              ),
-            );
+                ),
+              );
+            }
           },
-        );
-      },
+        ),
+      ],
+    );
+  }
+}
+
+class _WeatherBackground extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    const color = AppColors.primary;
+    return SizedBox.expand(
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.25, 0.75, 0.90, 1.0],
+            colors: [
+              color,
+              color.brighten(),
+              color.brighten(33),
+              color.brighten(50),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

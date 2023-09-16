@@ -8,16 +8,16 @@ part 'weather_state.dart';
 part 'weather_cubit.freezed.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
-  WeatherCubit(this._repo) : super(const WeatherState.loading());
+  WeatherCubit(this._repo) : super(const WeatherState(isLoading: true));
 
   final WeatherRepo _repo;
 
   Future<void> fetchWeather() async {
     try {
       final weather = await _repo.getCurrentWeather();
-      emit(WeatherState.data(weather));
+      emit(state.copyWith(weather: weather));
     } on ApiException catch (e) {
-      emit(_Failure(e));
+      emit(state.copyWith(exception: e));
     }
   }
 }
