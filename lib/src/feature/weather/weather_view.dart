@@ -39,12 +39,7 @@ class WeatherView extends StatelessWidget {
                   padding: const EdgeInsets.all(32),
                   child: Column(
                     children: [
-                      Center(
-                        child: Text(
-                          'Today',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                      ),
+                      sizedV,
                       sizedV,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
