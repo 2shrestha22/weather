@@ -4,7 +4,7 @@ part of 'weather_cubit.dart';
 class WeatherState with _$WeatherState {
   const factory WeatherState({
     Weather? weather,
-    ApiException? exception,
+    AppException? exception,
     @Default(false) bool isLoading,
   }) = _WeatherState;
 }

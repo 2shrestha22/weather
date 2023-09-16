@@ -7,6 +7,7 @@ import 'package:weather/src/core/extension/color_x.dart';
 import 'package:weather/src/core/helper/open_weather_helper.dart';
 import 'package:weather/src/core/widget/error_indicator.dart';
 import 'package:weather/src/core/widget/loading_indicator.dart';
+import 'package:weather/src/feature/weather/domain/model/weather.dart';
 import 'package:weather/src/feature/weather/presentation/cubit/weather_cubit.dart';
 
 class WeatherView extends StatelessWidget {
@@ -17,103 +18,113 @@ class WeatherView extends StatelessWidget {
     return Stack(
       children: [
         _WeatherBackground(),
-        BlocBuilder<WeatherCubit, WeatherState>(
-          builder: (context, state) {
-            final weather = state.weather;
+        SafeArea(
+          child: BlocBuilder<WeatherCubit, WeatherState>(
+            builder: (context, state) {
+              final weather = state.weather;
 
-            if (weather == null) {
-              // when weather is no yet availabe. Should show either loading
-              // or error.
-              if (state.exception != null) {
-                return ErrorIndicator(message: state.exception.toString());
-              }
-              return const LoadingIndicator();
-            } else {
-              // weather is availabe. user can refresh weather.
-              return RefreshIndicator(
-                onRefresh: () async {
-                  await context.read<WeatherCubit>().fetchWeather();
-                },
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.all(32),
-                  child: Column(
-                    children: [
-                      sizedV,
-                      sizedV,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.location_pin,
-                            size: 42,
-                          ),
-                          Text(
-                            weather.city,
-                            style: Theme.of(context).textTheme.displayMedium,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 200,
-                        child: Row(
+              if (weather == null) {
+                // when weather is no yet availabe. Should show either loading
+                // or error.
+                if (state.exception != null) {
+                  return ErrorIndicator(message: state.exception.toString());
+                }
+                return const LoadingIndicator();
+              } else {
+                // weather is availabe. user can refresh weather.
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    await context.read<WeatherCubit>().fetchWeather();
+                  },
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(32),
+                    child: Column(
+                      children: [
+                        sizedV,
+                        sizedV,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Flexible(
-                              child: CachedNetworkImage(
-                                fit: BoxFit.scaleDown,
-                                imageUrl: OpenWeatherHelper.getIconUrl(
-                                  weather.weatherConditions.first.icon,
-                                  multiple: 4,
-                                ),
-                              ),
+                            const Icon(
+                              Icons.location_pin,
+                              size: 42,
                             ),
-                            Flexible(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    weather.weatherConditions.first.description
-                                        .toUpperCase(),
-                                    style:
-                                        Theme.of(context).textTheme.labelLarge,
-                                  ),
-                                  Text(
-                                    '${weather.weatherData.temp} \u2103',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium,
-                                  ),
-                                  Text(
-                                    'Feels like ${weather.weatherData.temp} \u2103',
-                                    style:
-                                        Theme.of(context).textTheme.labelMedium,
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              weather.city,
+                              style: Theme.of(context).textTheme.displayMedium,
                             ),
                           ],
                         ),
-                      ),
-                      sizedV,
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Min: ${weather.weatherData.tempMin} \u2103'),
-                          sizedH,
-                          sizedH,
-                          Text('Max: ${weather.weatherData.tempMax} \u2103'),
-                        ],
-                      ),
-                      Text('Pressure: ${weather.weatherData.pressure} hPa'),
-                      Text('Humidity: ${weather.weatherData.humidity} %'),
-                    ],
+                        _WeatherInfo(weather: weather),
+                        sizedV,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Min: ${weather.weatherData.tempMin} \u2103'),
+                            sizedH,
+                            sizedH,
+                            Text('Max: ${weather.weatherData.tempMax} \u2103'),
+                          ],
+                        ),
+                        Text('Pressure: ${weather.weatherData.pressure} hPa'),
+                        Text('Humidity: ${weather.weatherData.humidity} %'),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }
-          },
+                );
+              }
+            },
+          ),
         ),
       ],
+    );
+  }
+}
+
+class _WeatherInfo extends StatelessWidget {
+  const _WeatherInfo({
+    required this.weather,
+  });
+
+  final Weather weather;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: Row(
+        children: [
+          Flexible(
+            child: CachedNetworkImage(
+              fit: BoxFit.scaleDown,
+              imageUrl: OpenWeatherHelper.getIconUrl(
+                weather.weatherConditions.first.icon,
+                multiple: 4,
+              ),
+            ),
+          ),
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  weather.weatherConditions.first.description.toUpperCase(),
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                Text(
+                  '${weather.weatherData.temp} \u2103',
+                  style: Theme.of(context).textTheme.displayMedium,
+                ),
+                Text(
+                  'Feels like ${weather.weatherData.temp} \u2103',
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

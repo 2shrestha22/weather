@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WeatherState {
   Weather? get weather => throw _privateConstructorUsedError;
-  ApiException? get exception => throw _privateConstructorUsedError;
+  AppException? get exception => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +31,7 @@ abstract class $WeatherStateCopyWith<$Res> {
           WeatherState value, $Res Function(WeatherState) then) =
       _$WeatherStateCopyWithImpl<$Res, WeatherState>;
   @useResult
-  $Res call({Weather? weather, ApiException? exception, bool isLoading});
+  $Res call({Weather? weather, AppException? exception, bool isLoading});
 
   $WeatherCopyWith<$Res>? get weather;
 }
@@ -61,7 +61,7 @@ class _$WeatherStateCopyWithImpl<$Res, $Val extends WeatherState>
       exception: freezed == exception
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
-              as ApiException?,
+              as AppException?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -90,7 +90,7 @@ abstract class _$$_WeatherStateCopyWith<$Res>
       __$$_WeatherStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Weather? weather, ApiException? exception, bool isLoading});
+  $Res call({Weather? weather, AppException? exception, bool isLoading});
 
   @override
   $WeatherCopyWith<$Res>? get weather;
@@ -119,7 +119,7 @@ class __$$_WeatherStateCopyWithImpl<$Res>
       exception: freezed == exception
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
-              as ApiException?,
+              as AppException?,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -136,7 +136,7 @@ class _$_WeatherState implements _WeatherState {
   @override
   final Weather? weather;
   @override
-  final ApiException? exception;
+  final AppException? exception;
   @override
   @JsonKey()
   final bool isLoading;
@@ -171,13 +171,13 @@ class _$_WeatherState implements _WeatherState {
 abstract class _WeatherState implements WeatherState {
   const factory _WeatherState(
       {final Weather? weather,
-      final ApiException? exception,
+      final AppException? exception,
       final bool isLoading}) = _$_WeatherState;
 
   @override
   Weather? get weather;
   @override
-  ApiException? get exception;
+  AppException? get exception;
   @override
   bool get isLoading;
   @override

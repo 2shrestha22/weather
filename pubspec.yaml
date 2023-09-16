@@ -43,6 +43,7 @@ dependencies:
   hive: ^2.2.3
   path_provider: ^2.1.1
   dynamik_theme: ^0.1.1
+  geolocator: ^10.0.1
 
 dev_dependencies:
   flutter_test:
