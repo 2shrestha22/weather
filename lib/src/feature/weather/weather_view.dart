@@ -14,27 +14,28 @@ class WeatherView extends StatelessWidget {
     return BlocBuilder<WeatherCubit, WeatherState>(
       builder: (context, state) {
         return state.when(
-            loading: () => const LoadingIndicator(),
-            failure: (e) => ErrorIndicator(message: e.toString()),
-            data: (weather) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Text(
-                      'Today',
-                      style: Theme.of(context).textTheme.displaySmall,
+          loading: () => const LoadingIndicator(),
+          failure: (e) => ErrorIndicator(message: e.toString()),
+          data: (weather) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Text(
+                    'Today',
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  Text(weather.weatherConditions.first.main),
+                  CachedNetworkImage(
+                    imageUrl: OpenWeatherHelper.getIconUrl(
+                      weather.weatherConditions.first.icon,
                     ),
-                    Text(weather.weatherConditions.first.main),
-                    CachedNetworkImage(
-                      imageUrl: OpenWeatherHelper.getIconUrl(
-                        weather.weatherConditions.first.icon,
-                      ),
-                    ),
-                    Text(weather.weatherConditions.first.description),
-                  ],
-                ),
-              );
-            });
+                  ),
+                  Text(weather.weatherConditions.first.description),
+                ],
+              ),
+            );
+          },
+        );
       },
     );
   }

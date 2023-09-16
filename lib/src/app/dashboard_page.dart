@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather/src/feature/remainder/remainder_view.dart';
+import 'package:weather/src/feature/weather/data/weather_repo_impl.dart';
 import 'package:weather/src/feature/weather/domain/weather_repo.dart';
 import 'package:weather/src/feature/weather/presentation/cubit/weather_cubit.dart';
 import 'package:weather/src/feature/weather/weather_view.dart';
@@ -18,34 +19,42 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Weather'),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: (value) {
-          pageController.jumpToPage(value);
-        },
-        currentIndex: viewIndex,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.sunny), label: 'Weather'),
-          BottomNavigationBarItem(icon: Icon(Icons.alarm), label: 'Remainder'),
-        ],
-      ),
-      body: BlocProvider(
-        create: (context) =>
-            WeatherCubit(context.read<WeatherRepo>())..fetchWeather(),
-        child: PageView(
-          controller: pageController,
-          onPageChanged: (value) {
-            setState(() {
-              viewIndex = value;
-            });
-          },
-          children: const [
-            WeatherView(),
-            RemainderView(),
+    return RepositoryProvider<WeatherRepo>(
+      create: (context) => WeatherRepoImpl(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Weather'),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: pageController.jumpToPage,
+          currentIndex: viewIndex,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.sunny), label: 'Weather'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.alarm),
+              label: 'Remainder',
+            ),
           ],
+        ),
+        body: Builder(
+          builder: (context) {
+            return BlocProvider(
+              create: (context) =>
+                  WeatherCubit(context.read<WeatherRepo>())..fetchWeather(),
+              child: PageView(
+                controller: pageController,
+                onPageChanged: (value) {
+                  setState(() {
+                    viewIndex = value;
+                  });
+                },
+                children: const [
+                  WeatherView(),
+                  RemainderView(),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

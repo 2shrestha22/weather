@@ -1,20 +1,21 @@
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weather/src/core/exception/api_exception.dart';
-import 'package:weather/src/core/network/api_response.dart';
 
 abstract class BaseRemoteSource {
-  BaseRemoteSource(Dio dio) : _dio = dio;
+  BaseRemoteSource([Dio? dio]) : _dio = dio ?? Dio();
 
   final Dio _dio;
 
   @protected
-  Future<ApiResponse> get(String path) async {
+
+  /// Returns data on success or throws [ApiException] on error.
+  Future<dynamic> get(String path) async {
     try {
-      final res = await _dio.get(path);
-      return SuccessResponse(res.data);
+      final res = await _dio.get<Map<String, dynamic>>(path);
+      return res.data;
     } on DioException catch (e) {
-      return FailureResponse(ApiException(e.toString()));
+      throw ApiException(e.message ?? 'Connection failed.');
     }
   }
 }

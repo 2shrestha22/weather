@@ -12,8 +12,12 @@ class WeatherCubit extends Cubit<WeatherState> {
 
   final WeatherRepo _repo;
 
-  void fetchWeather() async {
-    final weather = await _repo.getCurrentWeather();
-    emit(WeatherState.data(weather));
+  Future<void> fetchWeather() async {
+    try {
+      final weather = await _repo.getCurrentWeather();
+      emit(WeatherState.data(weather));
+    } on ApiException catch (e) {
+      emit(_Failure(e));
+    }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class ErrorIndicator extends StatelessWidget {
-  const ErrorIndicator({super.key, required this.message});
+  const ErrorIndicator({required this.message, super.key});
 
   final String message;
 
