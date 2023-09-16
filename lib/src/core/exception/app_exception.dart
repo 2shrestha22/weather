@@ -8,3 +8,7 @@ class AppException implements Exception {
     return message;
   }
 }
+
+class SomethingWentWrongException extends AppException {
+  SomethingWentWrongException() : super('Something went wrong.');
+}

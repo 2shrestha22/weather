@@ -27,7 +27,10 @@ class WeatherView extends StatelessWidget {
                 // when weather is no yet availabe. Should show either loading
                 // or error.
                 if (state.exception != null) {
-                  return ErrorIndicator(message: state.exception.toString());
+                  return ErrorIndicator(
+                    message: state.exception.toString(),
+                    onRetry: () => context.read<WeatherCubit>().fetchWeather(),
+                  );
                 }
                 return const LoadingIndicator();
               } else {

@@ -13,11 +13,14 @@ class WeatherCubit extends Cubit<WeatherState> {
   final WeatherRepo _repo;
 
   Future<void> fetchWeather() async {
+    emit(state.copyWith(exception: null, isLoading: true));
     try {
       final weather = await _repo.getCurrentWeather();
       emit(state.copyWith(weather: weather));
     } on AppException catch (e) {
       emit(state.copyWith(exception: e));
+    } catch (e) {
+      emit(state.copyWith(exception: SomethingWentWrongException()));
     }
   }
 }
