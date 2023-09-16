@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather/src/feature/remainder/remainder_view.dart';
+import 'package:weather/src/feature/reminder/reminder_view.dart';
 import 'package:weather/src/feature/weather/data/weather_repo_impl.dart';
 import 'package:weather/src/feature/weather/domain/weather_repo.dart';
 import 'package:weather/src/feature/weather/presentation/cubit/weather_cubit.dart';
@@ -29,7 +29,7 @@ class _DashboardPageState extends State<DashboardPage> {
             BottomNavigationBarItem(icon: Icon(Icons.sunny), label: 'Weather'),
             BottomNavigationBarItem(
               icon: Icon(Icons.alarm),
-              label: 'Remainder',
+              label: 'Reminder',
             ),
           ],
         ),
@@ -47,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 },
                 children: const [
                   WeatherView(),
-                  RemainderView(),
+                  ReminderView(),
                 ],
               ),
             );
