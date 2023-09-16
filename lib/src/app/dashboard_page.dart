@@ -4,7 +4,7 @@ import 'package:weather/src/feature/remainder/remainder_view.dart';
 import 'package:weather/src/feature/weather/data/weather_repo_impl.dart';
 import 'package:weather/src/feature/weather/domain/weather_repo.dart';
 import 'package:weather/src/feature/weather/presentation/cubit/weather_cubit.dart';
-import 'package:weather/src/feature/weather/weather_view.dart';
+import 'package:weather/src/feature/weather/presentation/weather_view.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
