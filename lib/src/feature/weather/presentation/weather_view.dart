@@ -51,11 +51,11 @@ class WeatherView extends StatelessWidget {
                           children: [
                             const Icon(
                               Icons.location_pin,
-                              size: 42,
+                              size: 36,
                             ),
                             Text(
                               weather.city,
-                              style: Theme.of(context).textTheme.displayMedium,
+                              style: Theme.of(context).textTheme.displaySmall,
                             ),
                           ],
                         ),
