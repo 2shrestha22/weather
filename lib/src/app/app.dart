@@ -14,6 +14,10 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
       ).copyWith(
         appBarTheme: const AppBarTheme(centerTitle: true),
+        inputDecorationTheme: const InputDecorationTheme(
+          border: OutlineInputBorder(),
+          alignLabelWithHint: true,
+        ),
       ),
       title: 'Weather',
       home: const DashboardPage(),

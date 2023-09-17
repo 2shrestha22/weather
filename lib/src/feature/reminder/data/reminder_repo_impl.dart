@@ -1,22 +1,37 @@
+import 'package:hive/hive.dart';
+import 'package:weather/src/core/helper/storage_helper.dart';
+import 'package:weather/src/core/service/storage_service.dart';
 import 'package:weather/src/feature/reminder/domain/model/reminder.dart';
 import 'package:weather/src/feature/reminder/domain/reminder_repo.dart';
 
 class ReminderRepoImpl implements ReminderRepo {
-  @override
-  Future<void> createReminder(Reminder remainder) {
-    // TODO: implement createReminder
-    throw UnimplementedError();
-  }
+  ReminderRepoImpl()
+      : _storageService =
+            StorageService(Hive.box(StorageHelper.reminderBoxName));
+
+  final StorageService _storageService;
 
   @override
-  Reminder deleteReminder(String id) {
-    // TODO: implement deleteReminder
-    throw UnimplementedError();
-  }
+  Future<void> createReminder(Reminder remainder) =>
+      _storageService.put(remainder.id, remainder);
+
+  @override
+  Future<void> deleteReminder(String id) => _storageService.delete(id);
 
   @override
   List<Reminder> getReminders() {
-    // TODO: implement getReminders
-    throw UnimplementedError();
+    return _storageService
+        .getAll()
+        .map((e) => Reminder.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  @override
+  Stream<List<Reminder>> stream() {
+    return _storageService.dataStream().map(
+          (event) => event
+              .map((e) => Reminder.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
   }
 }

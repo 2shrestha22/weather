@@ -32,3 +32,6 @@ analyzer:
     - lib/**.g.dart
     - lib/**.gr.dart
     - pubspec.yaml
+  
+  language:
+    strict-raw-types: false

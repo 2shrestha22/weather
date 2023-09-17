@@ -1,6 +1,8 @@
 class StorageHelper {
   const StorageHelper._();
 
-  static const cacheBoxName = 'CACHEBOX';
+  static const cacheBoxName = 'CACHE_BOX';
   static const weatherKey = 'WEATHER';
+
+  static const reminderBoxName = 'REMINDER_BOX';
 }
