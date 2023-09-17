@@ -25,7 +25,7 @@ class ReminderRepoImpl implements ReminderRepo {
       id: reminder.id,
       title: reminder.title,
       body: reminder.description ?? '',
-      time: reminder.time.add(const Duration(minutes: 5)),
+      time: reminder.time.subtract(const Duration(minutes: 5)),
     );
   }
 
