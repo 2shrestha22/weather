@@ -25,7 +25,16 @@ class _ReminderFormPageState extends State<ReminderFormPage> {
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
-          child: BlocBuilder<ReminderFormCubit, ReminderFormState>(
+          child: BlocConsumer<ReminderFormCubit, ReminderFormState>(
+            listener: (context, state) {
+              if (state.appException != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.appException.toString()),
+                  ),
+                );
+              }
+            },
             builder: (context, state) {
               return Column(
                 children: [
@@ -51,7 +60,7 @@ class _ReminderFormPageState extends State<ReminderFormPage> {
                     validator: (value) {
                       if (value == null) return 'Time is required.';
                       if (value.difference(DateTime.now()) <
-                          const Duration(minutes: 1)) {
+                          const Duration(minutes: 5)) {
                         return 'Time must be atleast 5 minute ahead from now.';
                       }
                       return null;
@@ -83,16 +92,6 @@ class _ReminderFormPageState extends State<ReminderFormPage> {
                       onPressed: () {
                         if (!_formKey.currentState!.validate()) {
                           return;
-                        }
-                        if (state.time!.difference(DateTime.now()) <
-                            const Duration(minutes: 1)) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Time must be atleast 1 minute ahead from now.',
-                              ),
-                            ),
-                          );
                         }
 
                         context
