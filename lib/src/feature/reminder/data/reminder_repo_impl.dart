@@ -13,14 +13,20 @@ class ReminderRepoImpl implements ReminderRepo {
   final StorageService _storageService;
 
   @override
-  Future<void> saveReminder(Reminder remainder) async {
+  Future<void> saveReminder({
+    required Reminder reminder,
+    required bool isUpdate,
+  }) async {
+    await _storageService.put(reminder.id, reminder);
+    if (isUpdate) {
+      await NotificationService.cancelNotification(reminder.id);
+    }
     await NotificationService.scheduleNotification(
-      id: remainder.id,
-      title: remainder.title,
-      body: remainder.description ?? '',
-      time: remainder.time,
+      id: reminder.id,
+      title: reminder.title,
+      body: reminder.description ?? '',
+      time: reminder.time.add(const Duration(minutes: 5)),
     );
-    return _storageService.put(remainder.id, remainder);
   }
 
   @override

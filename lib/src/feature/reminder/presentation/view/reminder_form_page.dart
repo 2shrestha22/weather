@@ -45,14 +45,14 @@ class _ReminderFormPageState extends State<ReminderFormPage> {
                     initialValue: state.time,
                     firstDate: DateTime.now(),
                     decoration: const InputDecoration(
-                      labelText: 'Time',
+                      labelText: 'Due time',
                     ),
                     onChanged: context.read<ReminderFormCubit>().onTimeChanged,
                     validator: (value) {
                       if (value == null) return 'Time is required.';
                       if (value.difference(DateTime.now()) <
                           const Duration(minutes: 1)) {
-                        return 'Time must be atleast 1 minute ahead from now.';
+                        return 'Time must be atleast 5 minute ahead from now.';
                       }
                       return null;
                     },
@@ -69,6 +69,13 @@ class _ReminderFormPageState extends State<ReminderFormPage> {
                         context.read<ReminderFormCubit>().onDescriptionChanged,
                   ),
                   sizedV,
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      '* Will notify 5 minutes before the due time.',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ),
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(

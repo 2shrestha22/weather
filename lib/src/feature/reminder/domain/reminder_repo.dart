@@ -6,7 +6,13 @@ abstract class ReminderRepo {
   /// Provides Stream of reminders.
   Stream<List<Reminder>> stream();
 
-  /// Save or update reminder.
-  Future<void> saveReminder(Reminder reminder);
+  /// Save or update reminder. Also enables notification 5 min before due time.
+  ///
+  /// When updated cancels old notification schedule and reschedule new one.
+  Future<void> saveReminder({
+    required Reminder reminder,
+    required bool isUpdate,
+  });
+
   Future<void> deleteReminder(String id);
 }

@@ -75,7 +75,10 @@ class ReminderFormCubit extends Cubit<ReminderFormState> {
     );
 
     try {
-      await _repo.saveReminder(reminder);
+      await _repo.saveReminder(
+        reminder: reminder,
+        isUpdate: !state.id.isEmptyOrNull(),
+      );
     } catch (e) {
       emit(state.copyWith(appException: AppException(e.toString())));
     }
