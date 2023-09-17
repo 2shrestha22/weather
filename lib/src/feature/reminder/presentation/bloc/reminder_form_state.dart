@@ -8,6 +8,7 @@ class ReminderFormState with _$ReminderFormState {
     required DateTime? time,
     // null id represents creating a new Reminder.
     required String? id,
+    AppException? appException,
   }) = _ReminderFormState;
 
   factory ReminderFormState.initial() => const ReminderFormState(

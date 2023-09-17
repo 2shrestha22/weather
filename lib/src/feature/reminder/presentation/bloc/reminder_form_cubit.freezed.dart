@@ -21,6 +21,7 @@ mixin _$ReminderFormState {
   DateTime? get time =>
       throw _privateConstructorUsedError; // null id represents creating a new Reminder.
   String? get id => throw _privateConstructorUsedError;
+  AppException? get appException => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReminderFormStateCopyWith<ReminderFormState> get copyWith =>
@@ -33,7 +34,12 @@ abstract class $ReminderFormStateCopyWith<$Res> {
           ReminderFormState value, $Res Function(ReminderFormState) then) =
       _$ReminderFormStateCopyWithImpl<$Res, ReminderFormState>;
   @useResult
-  $Res call({String title, String description, DateTime? time, String? id});
+  $Res call(
+      {String title,
+      String description,
+      DateTime? time,
+      String? id,
+      AppException? appException});
 }
 
 /// @nodoc
@@ -53,6 +59,7 @@ class _$ReminderFormStateCopyWithImpl<$Res, $Val extends ReminderFormState>
     Object? description = null,
     Object? time = freezed,
     Object? id = freezed,
+    Object? appException = freezed,
   }) {
     return _then(_value.copyWith(
       title: null == title
@@ -71,6 +78,10 @@ class _$ReminderFormStateCopyWithImpl<$Res, $Val extends ReminderFormState>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      appException: freezed == appException
+          ? _value.appException
+          : appException // ignore: cast_nullable_to_non_nullable
+              as AppException?,
     ) as $Val);
   }
 }
@@ -83,7 +94,12 @@ abstract class _$$_ReminderFormStateCopyWith<$Res>
       __$$_ReminderFormStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String description, DateTime? time, String? id});
+  $Res call(
+      {String title,
+      String description,
+      DateTime? time,
+      String? id,
+      AppException? appException});
 }
 
 /// @nodoc
@@ -101,6 +117,7 @@ class __$$_ReminderFormStateCopyWithImpl<$Res>
     Object? description = null,
     Object? time = freezed,
     Object? id = freezed,
+    Object? appException = freezed,
   }) {
     return _then(_$_ReminderFormState(
       title: null == title
@@ -119,6 +136,10 @@ class __$$_ReminderFormStateCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
+      appException: freezed == appException
+          ? _value.appException
+          : appException // ignore: cast_nullable_to_non_nullable
+              as AppException?,
     ));
   }
 }
@@ -130,7 +151,8 @@ class _$_ReminderFormState implements _ReminderFormState {
       {required this.title,
       required this.description,
       required this.time,
-      required this.id});
+      required this.id,
+      this.appException});
 
   @override
   final String title;
@@ -141,10 +163,12 @@ class _$_ReminderFormState implements _ReminderFormState {
 // null id represents creating a new Reminder.
   @override
   final String? id;
+  @override
+  final AppException? appException;
 
   @override
   String toString() {
-    return 'ReminderFormState(title: $title, description: $description, time: $time, id: $id)';
+    return 'ReminderFormState(title: $title, description: $description, time: $time, id: $id, appException: $appException)';
   }
 
   @override
@@ -156,11 +180,14 @@ class _$_ReminderFormState implements _ReminderFormState {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.time, time) || other.time == time) &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.appException, appException) ||
+                other.appException == appException));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, title, description, time, id);
+  int get hashCode =>
+      Object.hash(runtimeType, title, description, time, id, appException);
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +202,8 @@ abstract class _ReminderFormState implements ReminderFormState {
       {required final String title,
       required final String description,
       required final DateTime? time,
-      required final String? id}) = _$_ReminderFormState;
+      required final String? id,
+      final AppException? appException}) = _$_ReminderFormState;
 
   @override
   String get title;
@@ -185,6 +213,8 @@ abstract class _ReminderFormState implements ReminderFormState {
   DateTime? get time;
   @override // null id represents creating a new Reminder.
   String? get id;
+  @override
+  AppException? get appException;
   @override
   @JsonKey(ignore: true)
   _$$_ReminderFormStateCopyWith<_$_ReminderFormState> get copyWith =>

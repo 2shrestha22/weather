@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
+import 'package:weather/src/core/exception/app_exception.dart';
 import 'package:weather/src/core/extension/string_x.dart';
 import 'package:weather/src/feature/reminder/domain/model/reminder.dart';
 import 'package:weather/src/feature/reminder/domain/reminder_repo.dart';
@@ -22,18 +23,39 @@ class ReminderFormCubit extends Cubit<ReminderFormState> {
         title: reminder.title,
         time: reminder.time,
         description: reminder.description ?? '',
+        appException: null,
       ),
     );
   }
 
-  void onTitleChanged(String value) => emit(state.copyWith(title: value));
+  void onTitleChanged(String value) => emit(
+        state.copyWith(
+          title: value,
+          appException: null,
+        ),
+      );
 
-  void onDescriptionChanged(String value) =>
-      emit(state.copyWith(description: value));
+  void onDescriptionChanged(String value) => emit(
+        state.copyWith(
+          description: value,
+          appException: null,
+        ),
+      );
 
-  void onTimeChanged(DateTime? value) => emit(state.copyWith(time: value));
+  void onTimeChanged(DateTime? value) => emit(
+        state.copyWith(
+          time: value,
+          appException: null,
+        ),
+      );
 
   Future<void> onSubmit() async {
+    emit(
+      state.copyWith(
+        appException: null,
+      ),
+    );
+
     // There is validation in UI so this condition will be always false. But
     // to be sure and avoiding getting runtime exception.
     if (state.title.isEmpty || state.time == null) {
@@ -52,6 +74,10 @@ class ReminderFormCubit extends Cubit<ReminderFormState> {
       description: state.description,
     );
 
-    await _repo.saveReminder(reminder);
+    try {
+      await _repo.saveReminder(reminder);
+    } catch (e) {
+      emit(state.copyWith(appException: AppException(e.toString())));
+    }
   }
 }

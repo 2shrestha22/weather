@@ -5,4 +5,6 @@ class StorageHelper {
   static const weatherKey = 'WEATHER';
 
   static const reminderBoxName = 'REMINDER_BOX';
+
+  static const notificatioBoxName = 'NOTIFICATION_BOX';
 }
