@@ -28,7 +28,7 @@ More info: https://dart.dev/guides/environment-declarations
 
 ## Screenshots
 
-![](https://github.com/2shrestha22/weather/blob/main/media/app.gif)
-![](https://github.com/2shrestha22/weather/blob/main/media/screenshot_1.png)
-![](https://github.com/2shrestha22/weather/blob/main/media/screenshot_2.png)
-![](https://github.com/2shrestha22/weather/blob/main/media/screenshot_3.png)
+<img src="https://github.com/2shrestha22/weather/blob/main/media/app.gif" width="50%">
+<img src="https://github.com/2shrestha22/weather/blob/main/media/screenshot_1.png" width=50%>
+<img src="https://github.com/2shrestha22/weather/blob/main/media/screenshot_2.png" width=50%>
+<img src="https://github.com/2shrestha22/weather/blob/main/media/screenshot_3.png" width=50%>
