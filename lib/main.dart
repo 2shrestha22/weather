@@ -44,7 +44,7 @@ Future<void> main() async {
   tz.initializeTimeZones();
 
   const initializationSettingsAndroid =
-      AndroidInitializationSettings('launch_background');
+      AndroidInitializationSettings('notification_icon');
   const initializationSettingsDarwin = DarwinInitializationSettings();
 
   await FlutterLocalNotificationsPlugin().initialize(
