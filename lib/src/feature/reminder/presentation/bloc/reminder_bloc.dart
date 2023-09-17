@@ -12,14 +12,14 @@ part 'reminder_bloc.freezed.dart';
 class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
   ReminderBloc(this._repo) : super(const ReminderState()) {
     on<_Started>(_onStarted);
-    on<_ReminderCreated>(_onReminderCreated);
+    on<_ReminderDeleted>(_onReminderDeleted);
   }
   final ReminderRepo _repo;
 
-  FutureOr<void> _onStarted(_Started event, Emitter<ReminderState> emit) {
+  FutureOr<void> _onStarted(_Started event, Emitter<ReminderState> emit) async {
     // Start listening to reminder stream and emit state accoriding to state.
     // When item is added, deleted or updated it will be automatically updated.
-    emit.forEach(
+    await emit.forEach(
       _repo.stream(),
       onData: (data) {
         return state.copyWith(reminders: data);
@@ -27,8 +27,10 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
     );
   }
 
-  FutureOr<void> _onReminderCreated(
-    _ReminderCreated event,
+  FutureOr<void> _onReminderDeleted(
+    _ReminderDeleted event,
     Emitter<ReminderState> emit,
-  ) {}
+  ) async {
+    await _repo.deleteReminder(event.id);
+  }
 }

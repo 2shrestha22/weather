@@ -53,7 +53,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 BlocProvider(
                   create: (context) =>
-                      ReminderBloc(context.read<ReminderRepo>()),
+                      ReminderBloc(context.read<ReminderRepo>())
+                        ..add(const ReminderEvent.started()),
                 ),
               ],
               child: PageView(

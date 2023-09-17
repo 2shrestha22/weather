@@ -12,7 +12,7 @@ class ReminderRepoImpl implements ReminderRepo {
   final StorageService _storageService;
 
   @override
-  Future<void> createReminder(Reminder remainder) =>
+  Future<void> saveReminder(Reminder remainder) =>
       _storageService.put(remainder.id, remainder);
 
   @override

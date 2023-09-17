@@ -5,6 +5,8 @@ abstract class ReminderRepo {
 
   /// Provides Stream of reminders.
   Stream<List<Reminder>> stream();
-  Future<void> createReminder(Reminder reminder);
+
+  /// Save or update reminder.
+  Future<void> saveReminder(Reminder reminder);
   Future<void> deleteReminder(String id);
 }

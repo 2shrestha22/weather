@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:uuid/uuid.dart';
+import 'package:weather/src/core/extension/string_x.dart';
 import 'package:weather/src/feature/reminder/domain/model/reminder.dart';
 import 'package:weather/src/feature/reminder/domain/reminder_repo.dart';
 
@@ -13,6 +14,17 @@ class ReminderFormCubit extends Cubit<ReminderFormState> {
   ReminderFormCubit(this._repo) : super(ReminderFormState.initial());
 
   final ReminderRepo _repo;
+
+  void initForm(Reminder reminder) {
+    emit(
+      state.copyWith(
+        id: reminder.id,
+        title: reminder.title,
+        time: reminder.time,
+        description: reminder.description ?? '',
+      ),
+    );
+  }
 
   void onTitleChanged(String value) => emit(state.copyWith(title: value));
 
@@ -34,11 +46,12 @@ class ReminderFormCubit extends Cubit<ReminderFormState> {
 
     final reminder = Reminder(
       // if state.id is null or empty generate new id else use old id.
-      id: (state.id?.isEmpty ?? true) ? const Uuid().v4() : state.id!,
+      id: state.id.isEmptyOrNull() ? const Uuid().v4() : state.id!,
       title: state.title,
       time: state.time!,
+      description: state.description,
     );
 
-    await _repo.createReminder(reminder);
+    await _repo.saveReminder(reminder);
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hive/hive.dart';
+import 'package:rxdart/transformers.dart';
 
 /// Provides easy way to save and get objects in storage. Saves objects as
 /// JSON String.
@@ -55,6 +56,6 @@ class StorageService {
     _box.watch().listen((event) {
       controller.add(getAll());
     });
-    return controller.stream;
+    return controller.stream.startWith(getAll());
   }
 }

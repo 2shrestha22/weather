@@ -19,7 +19,6 @@ mixin _$ReminderEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() reminderCreated,
     required TResult Function(String id) reminderDeleted,
     required TResult Function() reminderUpdated,
   }) =>
@@ -27,7 +26,6 @@ mixin _$ReminderEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? reminderCreated,
     TResult? Function(String id)? reminderDeleted,
     TResult? Function()? reminderUpdated,
   }) =>
@@ -35,7 +33,6 @@ mixin _$ReminderEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? reminderCreated,
     TResult Function(String id)? reminderDeleted,
     TResult Function()? reminderUpdated,
     required TResult orElse(),
@@ -44,7 +41,6 @@ mixin _$ReminderEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_ReminderCreated value) reminderCreated,
     required TResult Function(_ReminderDeleted value) reminderDeleted,
     required TResult Function(_ReminderUpdated value) reminderUpdated,
   }) =>
@@ -52,7 +48,6 @@ mixin _$ReminderEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_ReminderCreated value)? reminderCreated,
     TResult? Function(_ReminderDeleted value)? reminderDeleted,
     TResult? Function(_ReminderUpdated value)? reminderUpdated,
   }) =>
@@ -60,7 +55,6 @@ mixin _$ReminderEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_ReminderCreated value)? reminderCreated,
     TResult Function(_ReminderDeleted value)? reminderDeleted,
     TResult Function(_ReminderUpdated value)? reminderUpdated,
     required TResult orElse(),
@@ -124,7 +118,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() reminderCreated,
     required TResult Function(String id) reminderDeleted,
     required TResult Function() reminderUpdated,
   }) {
@@ -135,7 +128,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? reminderCreated,
     TResult? Function(String id)? reminderDeleted,
     TResult? Function()? reminderUpdated,
   }) {
@@ -146,7 +138,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? reminderCreated,
     TResult Function(String id)? reminderDeleted,
     TResult Function()? reminderUpdated,
     required TResult orElse(),
@@ -161,7 +152,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_ReminderCreated value) reminderCreated,
     required TResult Function(_ReminderDeleted value) reminderDeleted,
     required TResult Function(_ReminderUpdated value) reminderUpdated,
   }) {
@@ -172,7 +162,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_ReminderCreated value)? reminderCreated,
     TResult? Function(_ReminderDeleted value)? reminderDeleted,
     TResult? Function(_ReminderUpdated value)? reminderUpdated,
   }) {
@@ -183,7 +172,6 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_ReminderCreated value)? reminderCreated,
     TResult Function(_ReminderDeleted value)? reminderDeleted,
     TResult Function(_ReminderUpdated value)? reminderUpdated,
     required TResult orElse(),
@@ -197,120 +185,6 @@ class _$_Started implements _Started {
 
 abstract class _Started implements ReminderEvent {
   const factory _Started() = _$_Started;
-}
-
-/// @nodoc
-abstract class _$$_ReminderCreatedCopyWith<$Res> {
-  factory _$$_ReminderCreatedCopyWith(
-          _$_ReminderCreated value, $Res Function(_$_ReminderCreated) then) =
-      __$$_ReminderCreatedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_ReminderCreatedCopyWithImpl<$Res>
-    extends _$ReminderEventCopyWithImpl<$Res, _$_ReminderCreated>
-    implements _$$_ReminderCreatedCopyWith<$Res> {
-  __$$_ReminderCreatedCopyWithImpl(
-      _$_ReminderCreated _value, $Res Function(_$_ReminderCreated) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_ReminderCreated implements _ReminderCreated {
-  const _$_ReminderCreated();
-
-  @override
-  String toString() {
-    return 'ReminderEvent.reminderCreated()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ReminderCreated);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() started,
-    required TResult Function() reminderCreated,
-    required TResult Function(String id) reminderDeleted,
-    required TResult Function() reminderUpdated,
-  }) {
-    return reminderCreated();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
-    TResult? Function()? reminderCreated,
-    TResult? Function(String id)? reminderDeleted,
-    TResult? Function()? reminderUpdated,
-  }) {
-    return reminderCreated?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
-    TResult Function()? reminderCreated,
-    TResult Function(String id)? reminderDeleted,
-    TResult Function()? reminderUpdated,
-    required TResult orElse(),
-  }) {
-    if (reminderCreated != null) {
-      return reminderCreated();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
-    required TResult Function(_ReminderCreated value) reminderCreated,
-    required TResult Function(_ReminderDeleted value) reminderDeleted,
-    required TResult Function(_ReminderUpdated value) reminderUpdated,
-  }) {
-    return reminderCreated(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
-    TResult? Function(_ReminderCreated value)? reminderCreated,
-    TResult? Function(_ReminderDeleted value)? reminderDeleted,
-    TResult? Function(_ReminderUpdated value)? reminderUpdated,
-  }) {
-    return reminderCreated?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
-    TResult Function(_ReminderCreated value)? reminderCreated,
-    TResult Function(_ReminderDeleted value)? reminderDeleted,
-    TResult Function(_ReminderUpdated value)? reminderUpdated,
-    required TResult orElse(),
-  }) {
-    if (reminderCreated != null) {
-      return reminderCreated(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ReminderCreated implements ReminderEvent {
-  const factory _ReminderCreated() = _$_ReminderCreated;
 }
 
 /// @nodoc
@@ -378,7 +252,6 @@ class _$_ReminderDeleted implements _ReminderDeleted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() reminderCreated,
     required TResult Function(String id) reminderDeleted,
     required TResult Function() reminderUpdated,
   }) {
@@ -389,7 +262,6 @@ class _$_ReminderDeleted implements _ReminderDeleted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? reminderCreated,
     TResult? Function(String id)? reminderDeleted,
     TResult? Function()? reminderUpdated,
   }) {
@@ -400,7 +272,6 @@ class _$_ReminderDeleted implements _ReminderDeleted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? reminderCreated,
     TResult Function(String id)? reminderDeleted,
     TResult Function()? reminderUpdated,
     required TResult orElse(),
@@ -415,7 +286,6 @@ class _$_ReminderDeleted implements _ReminderDeleted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_ReminderCreated value) reminderCreated,
     required TResult Function(_ReminderDeleted value) reminderDeleted,
     required TResult Function(_ReminderUpdated value) reminderUpdated,
   }) {
@@ -426,7 +296,6 @@ class _$_ReminderDeleted implements _ReminderDeleted {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_ReminderCreated value)? reminderCreated,
     TResult? Function(_ReminderDeleted value)? reminderDeleted,
     TResult? Function(_ReminderUpdated value)? reminderUpdated,
   }) {
@@ -437,7 +306,6 @@ class _$_ReminderDeleted implements _ReminderDeleted {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_ReminderCreated value)? reminderCreated,
     TResult Function(_ReminderDeleted value)? reminderDeleted,
     TResult Function(_ReminderUpdated value)? reminderUpdated,
     required TResult orElse(),
@@ -497,7 +365,6 @@ class _$_ReminderUpdated implements _ReminderUpdated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function() reminderCreated,
     required TResult Function(String id) reminderDeleted,
     required TResult Function() reminderUpdated,
   }) {
@@ -508,7 +375,6 @@ class _$_ReminderUpdated implements _ReminderUpdated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function()? reminderCreated,
     TResult? Function(String id)? reminderDeleted,
     TResult? Function()? reminderUpdated,
   }) {
@@ -519,7 +385,6 @@ class _$_ReminderUpdated implements _ReminderUpdated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function()? reminderCreated,
     TResult Function(String id)? reminderDeleted,
     TResult Function()? reminderUpdated,
     required TResult orElse(),
@@ -534,7 +399,6 @@ class _$_ReminderUpdated implements _ReminderUpdated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
-    required TResult Function(_ReminderCreated value) reminderCreated,
     required TResult Function(_ReminderDeleted value) reminderDeleted,
     required TResult Function(_ReminderUpdated value) reminderUpdated,
   }) {
@@ -545,7 +409,6 @@ class _$_ReminderUpdated implements _ReminderUpdated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
-    TResult? Function(_ReminderCreated value)? reminderCreated,
     TResult? Function(_ReminderDeleted value)? reminderDeleted,
     TResult? Function(_ReminderUpdated value)? reminderUpdated,
   }) {
@@ -556,7 +419,6 @@ class _$_ReminderUpdated implements _ReminderUpdated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
-    TResult Function(_ReminderCreated value)? reminderCreated,
     TResult Function(_ReminderDeleted value)? reminderDeleted,
     TResult Function(_ReminderUpdated value)? reminderUpdated,
     required TResult orElse(),
